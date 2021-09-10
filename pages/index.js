@@ -1,8 +1,10 @@
+import Layout from '../components/Layout'
+import Topbar from '../components/Topbar'
 
 export default function Home() {
   return (
-    <div>
-      <h1 className="font-roboto">Home</h1>
-    </div>
+    <Layout>
+      <Topbar />
+    </Layout>
   )
 }
