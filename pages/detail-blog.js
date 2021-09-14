@@ -1,8 +1,10 @@
 import Head from "next/head";
-import { Gap } from "../components";
+import { useRouter } from 'next/router'
+import { Button, Gap } from "../components";
 import Layout from "../components/layout/Layout";
 
 const DetailBlog = () => {
+  const router = useRouter()
   return (
     <Layout>
       <Head>
@@ -26,8 +28,12 @@ const DetailBlog = () => {
             <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Necessitatibus doloribus recusandae voluptatum obcaecati? Quod soluta facilis impedit eius eum natus quam. Sapiente dolorem vero quo tempora facere eveniet, alias molestiae eligendi, totam unde in autem quibusdam? Tempora nesciunt debitis molestias, mollitia ratione, eius fuga dignissimos repellat veniam nulla id aperiam perspiciatis reprehenderit dolor autem error animi ea quam maiores ducimus. Corporis deleniti similique ad libero doloremque hic officia incidunt neque labore, magnam eos, fuga ipsum modi illum mollitia at inventore ipsa facere quasi iusto omnis quas necessitatibus. Nesciunt ipsum iste nihil, tenetur labore quidem, eligendi quibusdam ratione quasi ea eaque!</p>
             <Gap height="1rem"/>
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique, culpa tempora deserunt distinctio cupiditate soluta a hic repudiandae, accusantium ea quisquam. Sapiente ducimus cum perspiciatis et officiis odio dolorum odit, nihil laborum nulla repellat dicta neque. Necessitatibus enim at animi pariatur rerum incidunt! Nesciunt consequatur cupiditate officia tempore, blanditiis accusantium ex quae fugiat explicabo quibusdam accusamus voluptatum commodi earum, exercitationem libero atque harum fuga rerum? Quos adipisci expedita possimus fugiat, cumque officiis blanditiis, dignissimos quia incidunt illo molestiae! Harum accusantium quibusdam expedita in illum, sequi magnam voluptates adipisci molestiae facere, voluptas numquam aliquam inventore similique possimus dignissimos iure esse impedit.</p>
+
+            
           </div>
           <Gap height="2rem"/>
+          <Button onClick={() => router.push('/')} title="Back to.." className="border bg-blue-500 text-white px-9 py-2 rounded-md shadow-md"/>
+          <Gap height="2rem" />
         </article>
       </main>
     </Layout>

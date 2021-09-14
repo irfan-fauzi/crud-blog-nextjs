@@ -1,7 +1,9 @@
+import { useRouter } from 'next/router'
 import { Input, Button, Gap } from "../components"
 
 
 const Register = () => {
+  const router = useRouter()
   return (
     <article className="bg-gradient-to-b from-purple-200 to-blue-300 flex items-center h-[100vh] font-raleway">
       <div className="container m-auto flex justify-center">
@@ -20,7 +22,7 @@ const Register = () => {
           <Input label="password" type="password" placeholder=" password at least 5 character..."/>
           <Gap height="30px"/>
           <div className="flex gap-3">
-            <Button title="register" className="bg-gradient-to-br from-purple-500 to-purple-700 shadow-xl text-white px-7 py-2 rounded-md cursor-pointer block"/>
+            <Button onClick={() => router.push('/login')} title="register" className="bg-gradient-to-br from-purple-500 to-purple-700 shadow-xl text-white px-7 py-2 rounded-md cursor-pointer block"/>
             <a href="/login" className="px-7 py-2 bg-gradient-to-br from-red-400 to-red-500 rounded-md text-white sha">I want login</a>
           </div>
         </section>

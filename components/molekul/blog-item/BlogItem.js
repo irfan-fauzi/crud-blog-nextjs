@@ -14,7 +14,7 @@ const BlogItem = ({img, title, desc, author, date}) => {
           <p>- {date}</p>
         </div>
         <Link href="/detail-blog">
-          <h2 className="text-2xl font-normal cursor-pointer">{title}</h2>
+          <h2 className="text-2xl font-normal cursor-pointer text-gray-700 hover:underline hover:text-purple-900 transition-all">{title}</h2>
         </Link>
         <Gap height="1rem"/>
         <h3 className="text-gray-600 font-light">{desc}</h3>
