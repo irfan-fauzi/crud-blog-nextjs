@@ -16,14 +16,18 @@ export default function Home() {
         <Gap height="1rem" />
         <Button title="Create new post" className="bg-blue-500 text-white py-3 px-5 shadow-lg rounded-md"/>
         <Gap height="2rem"/>
-        <article className="grid grid-cols-3 gap-[2rem]">
+        <article className="grid md:grid-cols-2 lg:grid-cols-3 gap-[2rem]">
           {
             dummyJson.map(post => (
-              <BlogItem key={Math.random()} img={post.img} title={post.title} desc={post.desc} />
+              <BlogItem key={Math.random()} img={post.img} title={post.title} desc={post.desc} author={post.nameWriter} date={post.date} />
               ))
           } 
         </article>
-        <div>pagination</div>
+        <Gap height="3rem"/>
+        <div className="flex gap-2 w-full  justify-center cursor-pointer">
+          <Button title="< prev" className="bg-blue-200 px-4 py-1"/>
+          <Button title="next >" className="bg-blue-200 px-4 py-1 cursor-pointer" />
+        </div>
         <Gap height="3rem"/>
       </main>
     </Layout>

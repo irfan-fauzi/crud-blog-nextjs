@@ -4,7 +4,7 @@ const Layout = ({children}) => {
   return (
     <>
     <Header />
-      <div className="font-raleway min-h-screen max-w-[1200px] px-1 mx-auto">
+      <div className="font-raleway min-h-screen max-w-[1200px] px-4 lg:px-1 mx-auto">
         {children}
       </div>
     <Footer/>
