@@ -7,7 +7,9 @@ const DetailBlog = () => {
       <Head>
         <title>Blog detail</title>
       </Head>
-
+      <main>
+        <h1>Detail blog</h1>
+      </main>
     </Layout>
   )
 }
