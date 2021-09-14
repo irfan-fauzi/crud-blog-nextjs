@@ -1,10 +1,11 @@
 import Head from 'next/head'
+import { useRouter } from 'next/router'
 import { BlogItem, Button, Gap } from '../components';
 import Layout from "../components/layout/Layout";
 import dummyJson from '../utils/posts.json'
 
 export default function Home() {
-  
+  const router = useRouter()
   return (
     <Layout>
       <Head>
@@ -12,9 +13,12 @@ export default function Home() {
       </Head>
       <main>
         <Gap height="2rem" />
-        <h1 className="text-3xl">Halaman Utama</h1>
+        <h1 className="text-3xl">
+          Halaman Utama
+          
+        </h1>
         <Gap height="1rem" />
-        <Button title="Create new post" className="bg-blue-500 text-white py-3 px-5 shadow-lg rounded-md"/>
+        <Button onClick={() => router.push('/create-post')} title="Create new post" className="bg-blue-500 text-white py-3 px-5 shadow-lg rounded-md"/>
         <Gap height="2rem"/>
         <article className="grid md:grid-cols-2 lg:grid-cols-3 gap-[2rem]">
           {
