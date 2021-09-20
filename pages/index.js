@@ -1,10 +1,24 @@
+import axios from 'axios';
 import Head from 'next/head'
 import { useRouter } from 'next/router'
+import { useEffect, useState } from 'react';
 import { BlogItem, Button, Gap } from '../components';
 import Layout from "../components/layout/Layout";
 import dummyJson from '../utils/posts.json'
 
 export default function Home() {
+  const blogPosts = useState([])
+  const URL = `http://localhost:4000/v1/blog/posts`
+
+  useEffect(() => {
+    axios.get(`${URL}?perPage=6`).then(res => {
+      console.log(res.data)
+    })
+    .catch(err => {
+      console.log(err)
+    })
+  }, [])
+
   const router = useRouter()
   return (
     <Layout>
@@ -23,7 +37,7 @@ export default function Home() {
         <article className="grid md:grid-cols-2 lg:grid-cols-3 gap-[2rem]">
           {
             dummyJson.map(post => (
-              <BlogItem key={Math.random()} img={post.img} title={post.title} desc={post.desc} author={post.nameWriter} date={post.date} />
+              <BlogItem key={Math.random()} img={post.img} title={post.title} desc={post.desc} author={post.author} date={post.date} />
               ))
           } 
         </article>
