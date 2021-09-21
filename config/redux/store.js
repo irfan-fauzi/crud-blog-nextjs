@@ -1,5 +1,14 @@
 const { createStore } = require("redux");
 
-const store = createStore()
+const initialState = {
+  blogPosts: [],
+  name: "irfanf "
+}
+
+const reducer = (state = initialState, action) => {
+  return state
+}
+
+const store = createStore(reducer)
 
 export default store

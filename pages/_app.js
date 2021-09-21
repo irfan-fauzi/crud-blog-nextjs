@@ -1,12 +1,14 @@
 
+import { Provider } from 'react-redux'
+import { store } from '../config/index'
 import 'tailwindcss/tailwind.css'
 
 function MyApp({ Component, pageProps }) {
 
   return (
-   
+    <Provider store={store}>
       <Component {...pageProps} />
-    
+    </Provider>
   ) 
 }
 

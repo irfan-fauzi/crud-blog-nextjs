@@ -2,6 +2,7 @@ import axios from 'axios';
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { BlogItem, Button, Gap } from '../components';
 import Layout from "../components/layout/Layout";
 
@@ -9,6 +10,8 @@ import Layout from "../components/layout/Layout";
 export default function Home() {
 
   const [blogPosts, setBlogPosts] = useState([])
+  const stateGlobal = useSelector(state => state)
+  console.log(stateGlobal)
   const mainURL = 'http://localhost:4000'
   const URL = `${mainURL}/v1/blog/posts`
 
@@ -24,6 +27,7 @@ export default function Home() {
   
   const router = useRouter()
   return (
+    
     <Layout>
       <Head>
         <title>Home</title>
