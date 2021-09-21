@@ -4,21 +4,24 @@ import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react';
 import { BlogItem, Button, Gap } from '../components';
 import Layout from "../components/layout/Layout";
-import dummyJson from '../utils/posts.json'
+
 
 export default function Home() {
-  const blogPosts = useState([])
-  const URL = `http://localhost:4000/v1/blog/posts`
+
+  const [blogPosts, setBlogPosts] = useState([])
+  const mainURL = 'http://localhost:4000'
+  const URL = `${mainURL}/v1/blog/posts`
 
   useEffect(() => {
     axios.get(`${URL}?perPage=6`).then(res => {
-      console.log(res.data)
+      const posts = res.data.all_posts
+      setBlogPosts(posts)
     })
     .catch(err => {
       console.log(err)
     })
   }, [])
-
+  
   const router = useRouter()
   return (
     <Layout>
@@ -36,8 +39,8 @@ export default function Home() {
         <Gap height="2rem"/>
         <article className="grid md:grid-cols-2 lg:grid-cols-3 gap-[2rem]">
           {
-            dummyJson.map(post => (
-              <BlogItem key={Math.random()} img={post.img} title={post.title} desc={post.desc} author={post.author} date={post.date} />
+            blogPosts.map(post => (
+              <BlogItem key={post._id} img={`${mainURL}/`+ post.image} title={post.title} desc={post.bodyBlog} author={post.author} date={post.createdAt} />
               ))
           } 
         </article>

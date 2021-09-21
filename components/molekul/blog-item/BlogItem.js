@@ -10,7 +10,7 @@ const BlogItem = ({img, title, desc, author, date}) => {
       <div className="border px-5 py-5">
         <Gap height=""/>
         <div className="flex gap-4 font-light">
-          <p>{author}</p>
+          <p>{author.name}</p>
           <p>- {date}</p>
         </div>
         <Link href="/detail-blog">
