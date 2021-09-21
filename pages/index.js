@@ -2,23 +2,26 @@ import axios from 'axios';
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { BlogItem, Button, Gap } from '../components';
 import Layout from "../components/layout/Layout";
 
 
 export default function Home() {
 
-  const [blogPosts, setBlogPosts] = useState([])
   const stateGlobal = useSelector(state => state)
-  console.log(stateGlobal)
+  const dispatch = useDispatch()
+  const {blogPosts, name} = stateGlobal
+  console.log(blogPosts)
   const mainURL = 'http://localhost:4000'
   const URL = `${mainURL}/v1/blog/posts`
 
+ 
   useEffect(() => {
+    
     axios.get(`${URL}?perPage=6`).then(res => {
       const posts = res.data.all_posts
-      setBlogPosts(posts)
+      dispatch({type: 'UPDATE_DATA_BLOG', payload: posts})
     })
     .catch(err => {
       console.log(err)
@@ -34,11 +37,13 @@ export default function Home() {
       </Head>
       <main>
         <Gap height="2rem" />
+        
         <h1 className="text-3xl">
           Halaman Utama
         </h1>
         <Gap height="1rem" />
         <Button onClick={() => router.push('/create-post')} title="Create new post" className="bg-blue-500 text-white py-3 px-5 shadow-lg rounded-md"/>
+        
         <Gap height="2rem"/>
         <article className="grid md:grid-cols-2 lg:grid-cols-3 gap-[2rem]">
           {
