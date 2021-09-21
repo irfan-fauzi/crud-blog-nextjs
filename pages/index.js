@@ -31,8 +31,7 @@ export default function Home() {
       <main>
         <Gap height="2rem" />
         <h1 className="text-3xl">
-          Halaman Utama 1
-          
+          Halaman Utama
         </h1>
         <Gap height="1rem" />
         <Button onClick={() => router.push('/create-post')} title="Create new post" className="bg-blue-500 text-white py-3 px-5 shadow-lg rounded-md"/>
