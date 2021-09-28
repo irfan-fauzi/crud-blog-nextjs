@@ -1,27 +1,30 @@
 import axios from 'axios';
 import Head from 'next/head'
 import { useRouter } from 'next/router'
-import { useEffect, useState } from 'react';
+import { useEffect} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { BlogItem, Button, Gap } from '../components';
 import Layout from "../components/layout/Layout";
+import { setDataBlog } from '../config/redux/action';
 
 
 export default function Home() {
 
-  const stateGlobal = useSelector(state => state)
+  const {homeReducer, globalReducer} = useSelector(state => state)
+  const {blogPosts} = homeReducer
+  
   const dispatch = useDispatch()
-  const {blogPosts, name} = stateGlobal
-  console.log(blogPosts)
+
+  
   const mainURL = 'http://localhost:4000'
   const URL = `${mainURL}/v1/blog/posts`
 
- 
+  
   useEffect(() => {
     
     axios.get(`${URL}?perPage=6`).then(res => {
       const posts = res.data.all_posts
-      dispatch({type: 'UPDATE_DATA_BLOG', payload: posts})
+      dispatch(setDataBlog(posts))
     })
     .catch(err => {
       console.log(err)
