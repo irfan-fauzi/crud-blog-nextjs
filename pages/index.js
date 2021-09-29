@@ -1,7 +1,7 @@
-import axios from 'axios';
+
 import Head from 'next/head'
 import { useRouter } from 'next/router'
-import { useEffect} from 'react';
+import { useEffect, useState} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { BlogItem, Button, Gap } from '../components';
 import Layout from "../components/layout/Layout";
@@ -9,29 +9,20 @@ import { setDataBlog } from '../config/redux/action';
 
 
 export default function Home() {
-
-  const {homeReducer, globalReducer} = useSelector(state => state)
-  const {blogPosts} = homeReducer
+  const mainURL = 'http://localhost:4000'
+  const router = useRouter()
+  const {homeReducer} = useSelector(state => state)
+  const {blogPosts, page} = homeReducer
   
   const dispatch = useDispatch()
+  const [pageCounter, setPageCounter] = useState(1)
 
-  
-  const mainURL = 'http://localhost:4000'
-  const URL = `${mainURL}/v1/blog/posts`
-
-  
   useEffect(() => {
+    dispatch(setDataBlog(pageCounter))
     
-    axios.get(`${URL}?perPage=6`).then(res => {
-      const posts = res.data.all_posts
-      dispatch(setDataBlog(posts))
-    })
-    .catch(err => {
-      console.log(err)
-    })
-  }, [])
-  
-  const router = useRouter()
+  },[dispatch,pageCounter])
+
+  console.log(page)
   return (
     
     <Layout>
@@ -40,7 +31,6 @@ export default function Home() {
       </Head>
       <main>
         <Gap height="2rem" />
-        
         <h1 className="text-3xl">
           Halaman Utama
         </h1>
@@ -56,9 +46,10 @@ export default function Home() {
           } 
         </article>
         <Gap height="3rem"/>
-        <div className="flex gap-2 w-full  justify-center cursor-pointer">
-          <Button title="< prev" className="bg-blue-200 px-4 py-1"/>
-          <Button title="next >" className="bg-blue-200 px-4 py-1 cursor-pointer" />
+        <div className="flex gap-5 w-full  justify-center items-center cursor-pointer">
+          <Button onClick={() => setPageCounter(pageCounter <= 1 ? 1 : pageCounter - 1 )} title="< prev" className={ pageCounter === 1 ? `bg-gray-300 px-4 py-1` : `bg-blue-300 px-4 py-1`} />
+          <span className="text-lg">{`${pageCounter}/${page.total}`}</span>
+          <Button onClick={() => setPageCounter(page.current === page.total ? pageCounter : pageCounter + 1)} title="next >" className={ page.total === page.current  ? `bg-gray-300 px-4 py-1 cursor-pointer text-white` : `px-4 py-1 bg-blue-300`} />
         </div>
         <Gap height="3rem"/>
       </main>
