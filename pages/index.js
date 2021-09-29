@@ -22,7 +22,6 @@ export default function Home() {
     
   },[dispatch,pageCounter])
 
-  console.log(page)
   return (
     
     <Layout>

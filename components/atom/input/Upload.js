@@ -1,12 +1,13 @@
 import React from 'react'
 import { Gap } from '..'
 
-const Upload = () => {
+const Upload = ({img, ...rest}) => {
   return (
     <>
-     <input type="file" />
+     <input {...rest} type="file" />
      <Gap height="1rem"/> 
-     <img src="/image/thumbnail-2.jpg" alt="preview" className="w-[200px] block" />
+     {img && <img src={img} alt="preview" className="w-[200px] block" />}
+     
     </>
   )
 }

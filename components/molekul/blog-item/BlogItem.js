@@ -5,7 +5,7 @@ const BlogItem = ({img, title, desc, author, date}) => {
   return (
     <section>
       <div>
-        <img src={img} alt="blog image" className="w-full"/>
+        <img src={img} alt="blog image" className="w-full h-[250px] object-cover "/>
       </div>
       <div className="border px-5 py-5">
         <Gap height=""/>
