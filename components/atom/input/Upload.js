@@ -6,7 +6,7 @@ const Upload = ({img, ...rest}) => {
     <>
      <input {...rest} type="file" />
      <Gap height="1rem"/> 
-     {img && <img src={img} alt="preview" className="w-[200px] block" />}
+     {img && <img src={img} alt="preview" className="w-[200px] block h-[200px] object-cover" />}
      
     </>
   )
