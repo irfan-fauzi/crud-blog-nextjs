@@ -40,7 +40,7 @@ export default function Home() {
         <article className="grid md:grid-cols-2 lg:grid-cols-3 gap-[2rem]">
           {
             blogPosts.map(post => (
-              <BlogItem key={post._id} img={`${mainURL}/`+ post.image} title={post.title} desc={post.bodyBlog} author={post.author} date={post.createdAt} />
+              <BlogItem key={post._id} img={`${mainURL}/`+ post.image} title={post.title} desc={post.bodyBlog} author={post.author} date={post.createdAt} id={post._id} />
               ))
           } 
         </article>

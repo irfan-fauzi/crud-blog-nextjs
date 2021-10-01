@@ -1,32 +1,19 @@
-import axios from 'axios'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
-import { useDispatch } from 'react-redux'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { Button, Gap, Input, Textarea, Upload } from '../components'
 import Layout from '../components/layout/Layout'
-import { setForm, setImgPreview } from '../config/redux/action'
+import { postToApi, setForm, setImgPreview } from '../config/redux/action'
 
 const CreatePost = () => {
   const router = useRouter()
   const {form, imgPreview} = useSelector(state => state.createBlogReducer)
-  const {title, bodyBlog, image} = form
+  const {title, bodyBlog} = form
   const dispatch = useDispatch()
 
   const onSubmit = () => {
-    const url = `http://localhost:4000/v1/blog/post`
-    const data = new FormData()
-    data.append('title', title)
-    data.append('bodyBlog', bodyBlog)
-    data.append('image', image)
-
-    axios.post(url, data, {
-      headers: {
-        'content-type': 'multipart/form-data'
-      }
-    })
-    .then(res => console.log(res))
-    .catch(err => console.log('ada masalah saat axios: ', err))
+    postToApi(form)
+    router.push('/')
   }
 
   const onImageUpload = (e) => {
