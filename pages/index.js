@@ -1,4 +1,3 @@
-
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { useEffect, useState} from 'react';
@@ -6,7 +5,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { BlogItem, Button, Gap } from '../components';
 import Layout from "../components/layout/Layout";
 import { setDataBlog } from '../config/redux/action';
-
 
 export default function Home() {
   const mainURL = 'http://localhost:4000'
@@ -23,7 +21,6 @@ export default function Home() {
   },[dispatch,pageCounter])
 
   return (
-    
     <Layout>
       <Head>
         <title>Home</title>
