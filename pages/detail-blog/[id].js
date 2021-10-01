@@ -9,19 +9,19 @@ const DetailBlog = () => {
   const router = useRouter()
   const [dataBlog, setDataBlog] = useState({})
   const {id} = router.query
-  // const {title, bodyBlog, image, author, createdAt} = dataBlog
-  console.log(id)
+  //const {title, bodyBlog, image, author, createdAt} = dataBlog
+  
   useEffect(() => {
    
     const url = `http://localhost:4000/v1/blog/post`
     axios.get(`${url}/${id}`)
     .then(res => {
-      setDataBlog(res.data.targetPost)
+      setDataBlog(res)
     })
     .catch(err => console.log(`ada masalah di promise : ${err}`))
 
   }, [dataBlog, id])
-  if(dataBlog.author){
+  
     return (
       <Layout>
         <Head>
@@ -30,17 +30,17 @@ const DetailBlog = () => {
         <main>
           <article className="lg:w-8/12 mx-auto">
             <Gap height="4rem"/>
-            <img src={`http://localhost:4000/${dataBlog.image}`} alt="" className="w-full h-[500px] object-cover"/>
+            {/* <img src={`http://localhost:4000/${dataBlog.image}`} alt="" className="w-full h-[500px] object-cover"/> */}
             <Gap height="2rem"/>
             <div className="flex gap-4 w-10/12 mx-auto">
-              <h3>{dataBlog.author.name}</h3>
-              <h4>{dataBlog.createdAt}</h4>
+              {/* <h3>{dataBlog.author.name}</h3>
+              <h4>{dataBlog.createdAt}</h4> */}
             </div>
             <Gap height="1rem"/>
             <div className="w-10/12 mx-auto">
-              <h1 className="text-3xl capitalize font-semibold">{dataBlog.title}</h1>
+              {/* <h1 className="text-3xl capitalize font-semibold">{dataBlog.title}</h1>
               <Gap height="1rem"/>
-              <p>{dataBlog.bodyBlog}</p>
+              <p>{dataBlog.bodyBlog}</p> */}
               
             </div>
             <Gap height="2rem"/>
@@ -50,10 +50,8 @@ const DetailBlog = () => {
         </main>
       </Layout>
     )
-  }
-  return(
-    <h1>Loading data...</h1>
-  )
+  
+  
   
 }
 
