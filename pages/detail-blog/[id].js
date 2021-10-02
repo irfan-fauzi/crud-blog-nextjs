@@ -2,28 +2,23 @@ import axios from "axios";
 import Head from "next/head";
 import { useRouter, withRouter } from 'next/router'
 import { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { Button, Gap, Loading } from "../../components";
 import Layout from "../../components/layout/Layout";
+import { setDetailBlog } from "../../config/redux/action";
 
 const DetailBlog = () => {
   const router = useRouter()
-  const [dataBlog, setDataBlog] = useState({})
-  const {id} = router.query 
-  useEffect(async() => {
-    try {
-      const url = `http://localhost:4000/v1/blog/post`
-      const hasil = await axios.get(`${url}/${id}`)
-      setDataBlog(hasil.data.targetPost)
-     
-    } catch (error) {
-      console.log('tunggu sebentar')
-    } finally{
-      console.log('ahirnya')
-    }
+  // const [dataBlog, setDataBlog] = useState({})
+  const {detailPost} = useSelector(state => state.detailReducer)
+  const dispatch = useDispatch()
+  const {id} = router.query
+  console.log(detailPost)
+  useEffect(() => {
+   dispatch(setDetailBlog(id))
     
   },[id])
-  if(dataBlog.author){
-
+   if(detailPost.author){
     return (
       <Layout>
         <Head>
@@ -32,17 +27,17 @@ const DetailBlog = () => {
         <main>
           <article className="lg:w-8/12 mx-auto">
             <Gap height="4rem"/>
-            <img src={`http://localhost:4000/${dataBlog.image}`} alt="" className="w-full h-[500px] object-cover"/>
+            <img src={`http://localhost:4000/${detailPost.image}`} alt="" className="w-full h-[500px] object-cover"/>
             <Gap height="2rem"/>
             <div className="flex gap-4 w-10/12 mx-auto">
-              <h3>{dataBlog.author.name ? dataBlog.author.name : `halo`}</h3>
-              <h4>{dataBlog.createdAt}</h4>
+              <h3>{detailPost.author.name}</h3>
+              <h4>{detailPost.createdAt}</h4>
             </div>
             <Gap height="1rem"/>
             <div className="w-10/12 mx-auto">
-              <h1 className="text-3xl capitalize font-semibold">{dataBlog.title}</h1>
+              <h1 className="text-3xl capitalize font-semibold">{detailPost.title}</h1>
               <Gap height="1rem"/>
-              <p>{dataBlog.bodyBlog}</p>
+              <p>{detailPost.bodyBlog}</p>
               
             </div>
             <Gap height="2rem"/>

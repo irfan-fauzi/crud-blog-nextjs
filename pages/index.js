@@ -11,7 +11,6 @@ export default function Home() {
   const router = useRouter()
   const {homeReducer} = useSelector(state => state)
   const {blogPosts, page} = homeReducer
-  
   const dispatch = useDispatch()
   const [pageCounter, setPageCounter] = useState(1)
 
