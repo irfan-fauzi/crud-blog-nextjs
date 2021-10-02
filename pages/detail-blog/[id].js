@@ -1,23 +1,19 @@
-import axios from "axios";
 import Head from "next/head";
 import { useRouter, withRouter } from 'next/router'
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Button, Gap, Loading } from "../../components";
+import { Button, Gap, PageNotfound } from "../../components";
 import Layout from "../../components/layout/Layout";
 import { setDetailBlog } from "../../config/redux/action";
 
 const DetailBlog = () => {
   const router = useRouter()
-  // const [dataBlog, setDataBlog] = useState({})
   const {detailPost} = useSelector(state => state.detailReducer)
   const dispatch = useDispatch()
   const {id} = router.query
-  console.log(detailPost)
   useEffect(() => {
    dispatch(setDetailBlog(id))
-    
-  },[id])
+  },[id, dispatch])
    if(detailPost.author){
     return (
       <Layout>
@@ -49,7 +45,7 @@ const DetailBlog = () => {
     )
    }
    return (
-     <Loading />
+     <PageNotfound />
    )
 }
 

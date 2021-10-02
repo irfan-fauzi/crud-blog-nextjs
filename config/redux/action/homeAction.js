@@ -7,7 +7,6 @@ export const setDataBlog = (page) => (dispatch) => {
       const current = res.data.current_page
       const totalPosts = res.data.total_post
       const total = Math.ceil(totalPosts / res.data.per_page)
-      
       const posts = res.data.all_posts
       dispatch({type: 'UPDATE_DATA_BLOG', payload: posts})
       dispatch({type: 'UPDATE_PAGE',payload: {current, total}})
