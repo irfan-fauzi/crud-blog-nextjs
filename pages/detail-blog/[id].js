@@ -11,12 +11,18 @@ const DetailBlog = () => {
   const {detailPost} = useSelector(state => state.detailReducer)
   const dispatch = useDispatch()
   const {id} = router.query
+
   useEffect(() => {
    dispatch(setDetailBlog(id))
   },[id, dispatch])
-   if(detailPost.author){
+
+   if(id !== detailPost._id){
     return (
-      <Layout>
+      <PageNotfound />
+    )
+   }
+   return (
+    <Layout>
         <Head>
           <title>Blog detail</title>
         </Head>
@@ -34,7 +40,6 @@ const DetailBlog = () => {
               <h1 className="text-3xl capitalize font-semibold">{detailPost.title}</h1>
               <Gap height="1rem"/>
               <p>{detailPost.bodyBlog}</p>
-              
             </div>
             <Gap height="2rem"/>
             <Button onClick={() => router.push('/')} title="Back to.." className="border bg-blue-500 text-white px-9 py-2 rounded-md shadow-md"/>
@@ -42,10 +47,6 @@ const DetailBlog = () => {
           </article>
         </main>
       </Layout>
-    )
-   }
-   return (
-     <PageNotfound />
    )
 }
 

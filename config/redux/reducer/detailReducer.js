@@ -1,5 +1,13 @@
 const initialStateDetail = {
-  detailPost: {}
+  detailPost: {
+    image: '',
+    author: {
+      uid: '',
+      name: ''
+    },
+    title: '',
+    bodyBlog: ''
+  }
 }
 
 const detailReducer = (state = initialStateDetail, action) => {
