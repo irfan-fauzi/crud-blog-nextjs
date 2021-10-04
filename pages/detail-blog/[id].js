@@ -16,13 +16,9 @@ const DetailBlog = () => {
    dispatch(setDetailBlog(id))
   },[id, dispatch])
 
-   if(id !== detailPost._id){
+   if(id === detailPost._id){
     return (
-      <PageNotfound />
-    )
-   }
-   return (
-    <Layout>
+      <Layout>
         <Head>
           <title>Blog detail</title>
         </Head>
@@ -47,6 +43,10 @@ const DetailBlog = () => {
           </article>
         </main>
       </Layout>
+    )
+   }
+   return (
+    <PageNotfound />
    )
 }
 
