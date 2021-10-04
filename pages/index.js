@@ -6,18 +6,21 @@ import { BlogItem, Button, Gap } from '../components';
 import Layout from "../components/layout/Layout";
 import { setDataBlog } from '../config/redux/action';
 
-export default function Home() {
+export default function Home({json}) {
+
+  const blogPosts = json.all_posts
+  // const {homeReducer} = useSelector(state => state)
+  // const {blogPosts, page} = homeReducer
+  // const dispatch = useDispatch()
+  // const [pageCounter, setPageCounter] = useState(1)
+
+  // useEffect(() => {
+  //   dispatch(setDataBlog(pageCounter))
+    
+  // },[dispatch,pageCounter])
+
   const mainURL = 'http://localhost:4000'
   const router = useRouter()
-  const {homeReducer} = useSelector(state => state)
-  const {blogPosts, page} = homeReducer
-  const dispatch = useDispatch()
-  const [pageCounter, setPageCounter] = useState(1)
-
-  useEffect(() => {
-    dispatch(setDataBlog(pageCounter))
-    
-  },[dispatch,pageCounter])
 
   return (
     <Layout>
@@ -42,12 +45,20 @@ export default function Home() {
         </article>
         <Gap height="3rem"/>
         <div className="flex gap-5 w-full  justify-center items-center cursor-pointer">
-          <Button onClick={() => setPageCounter(pageCounter <= 1 ? 1 : pageCounter - 1 )} title="< prev" className={ pageCounter === 1 ? `bg-gray-300 px-4 py-1` : `bg-blue-300 px-4 py-1`} />
-          <span className="text-lg">{`${pageCounter}/${page.total}`}</span>
-          <Button onClick={() => setPageCounter(page.current === page.total ? pageCounter : pageCounter + 1)} title="next >" className={ page.total === page.current  ? `bg-gray-300 px-4 py-1 cursor-pointer text-white` : `px-4 py-1 bg-blue-300`} />
+          {/* <Button onClick={() => setPageCounter(pageCounter <= 1 ? 1 : pageCounter - 1 )} title="< prev" className={ pageCounter === 1 ? `bg-gray-300 px-4 py-1` : `bg-blue-300 px-4 py-1`} />
+          {/* <span className="text-lg">{`${pageCounter}/${page.total}`}</span> */}
+          {/* <Button onClick={() => setPageCounter(page.current === page.total ? pageCounter : pageCounter + 1)} title="next >" className={ page.total === page.current  ? `bg-gray-300 px-4 py-1 cursor-pointer text-white` : `px-4 py-1 bg-blue-300`} /> */} 
         </div>
         <Gap height="3rem"/>
       </main>
     </Layout>
   )
+}
+
+export async function getStaticProps(){
+  const mainURL = 'http://localhost:4000'
+  const URL = `${mainURL}/v1/blog/posts`
+  const res = await fetch(`${URL}?page=1&perPage=6`)
+  const json = await res.json()
+  return { props: {json} }
 }
