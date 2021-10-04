@@ -8,7 +8,7 @@ import { setDataBlog } from '../config/redux/action';
 
 export default function Home() {
 
-  const blogPosts = json.all_posts
+ 
   const {homeReducer} = useSelector(state => state)
   const {blogPosts, page} = homeReducer
   const dispatch = useDispatch()
